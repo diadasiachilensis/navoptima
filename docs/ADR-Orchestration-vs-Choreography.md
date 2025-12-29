@@ -1,4 +1,4 @@
-# ADR-001: Orquestación Centralizada para Integridad Financiera
+# ADR: Orquestación Centralizada para Integridad Financiera
 
 ##  Contexto
 
