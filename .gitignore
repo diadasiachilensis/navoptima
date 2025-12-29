@@ -90,3 +90,8 @@ model_checkpoints/
 .coverage
 htmlcov/
 .mypy_cache/
+
+#ignorar archivos temporales de Draw.io y Office
+~$*
+.$*
+*.tmp

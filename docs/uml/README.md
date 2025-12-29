@@ -25,7 +25,7 @@ El principio rector que da vida al patrón Strategy es "Programar para una Inter
   * Las implementaciones pueden ser intercambiadas o añadidas en tiempo de ejecución sin afectar al cliente.
   * El sistema se vuelve extensible, ya que se pueden introducir nuevos comportamientos simplemente creando nuevas clases que implementen la interfaz.
 
-![uml](UML.png)
+![uml](../images/UML.png)
 
 > **Figura 1:** Implementación del Patrón Strategy en el componente Ingestion Worker. Se ilustra el desacoplamiento entre el ejecutor (Contexto) y los algoritmos de extracción (Estrategias Concretas). Esta estructura permite la intercambiabilidad de fuentes de datos (AIS, Clima, Bunker) y garantiza el Principio de Abierto/Cerrado (OCP), permitiendo añadir nuevos proveedores sin modificar la lógica central del sistema
 
