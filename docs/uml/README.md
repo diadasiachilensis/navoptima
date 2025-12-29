@@ -19,7 +19,7 @@ El principio rector que da vida al patrón Strategy es "Programar para una Inter
 * Depender de Implementaciones Concretas (Acoplamiento Fuerte):
   * El código cliente está ligado a una lógica específica.
   * Cualquier cambio en la implementación (por ejemplo, cambiar la fuente de una API a un flujo de Kafka) requiere modificar el código cliente.
-  * Añadir nuevos algoritmos obliga a alterar la lógica existente, a menudo introduciendo complejas estructuras condicionales (if/else o switch).
+  * Añadir nuevos algoritmos obliga a alterar la lógica existente, a menudo introduciendo complejas estructuras condicionales (`if/else` o `switch`).
 * Depender de Interfaces (Acoplamiento Débil):
   * El código cliente solo conoce el "contrato" (los métodos definidos en la interfaz), no los detalles de su cumplimiento.
   * Las implementaciones pueden ser intercambiadas o añadidas en tiempo de ejecución sin afectar al cliente.
@@ -31,22 +31,22 @@ El principio rector que da vida al patrón Strategy es "Programar para una Inter
 
 ### El Contexto: `IngestionWorker`
 
-El IngestionWorker actúa como el Contexto en el patrón Strategy. Su función es orquestar el proceso de ingesta de datos utilizando una estrategia específica que se le proporciona.
+El `IngestionWorker` actúa como el Contexto en el patrón Strategy. Su función es orquestar el proceso de ingesta de datos utilizando una estrategia específica que se le proporciona.
 
-El aspecto más crucial de su diseño es su total ignorancia sobre la implementación concreta del algoritmo de ingesta. Como se anota en el diagrama, "El contexto no sabe CÓMO se obtienen los datos, solo invoca fetch()". Esta separación se logra mediante la delegación: el IngestionWorker no implementa la lógica de obtención de datos, sino que delega esa responsabilidad al objeto de estrategia que contiene. Este es un claro ejemplo del principio de diseño que aconseja "Favorecer la Composición sobre la Herencia" [1], ya que el IngestionWorker se compone con una estrategia en lugar de heredar su comportamiento.
+El aspecto más crucial de su diseño es su total ignorancia sobre la implementación concreta del algoritmo de ingesta. Como se anota en el diagrama, "El contexto no sabe CÓMO se obtienen los datos, solo invoca `fecth()`". Esta separación se logra mediante la delegación: el `IngestionWorker` no implementa la lógica de obtención de datos, sino que delega esa responsabilidad al objeto de estrategia que contiene. Este es un claro ejemplo del principio de diseño que aconseja "Favorecer la Composición sobre la Herencia" [1], ya que el `IngestionWorker` se compone con una estrategia en lugar de heredar su comportamiento.
 
 ### La Estrategia Abstracta: `IngestionStrategy`
 
-La interfaz IngestionStrategy es la Estrategia Abstracta y el corazón del patrón en este diseño. Define un contrato común que todas las estrategias de ingesta concretas deben cumplir. En este caso, el contrato consiste en un único método: fetch().
+La interfaz `IngestionStrategy` es la Estrategia Abstracta y el corazón del patrón en este diseño. Define un contrato común que todas las estrategias de ingesta concretas deben cumplir. En este caso, el contrato consiste en un único método: `fecth()`.
 
-Esta abstracción es el punto clave de desacoplamiento. Al programar el IngestionWorker para que utilice esta interfaz, garantizamos que pueda trabajar con cualquier clase que la implemente. Esto permite que los algoritmos de ingesta sean completamente intercambiables, proporcionando una enorme flexibilidad al sistema [1]. El IngestionWorker no depende de AisStrategy ni de WeatherStrategy, sino de la abstracción IngestionStrategy.
+Esta abstracción es el punto clave de desacoplamiento. Al programar el `IngestionWorker` para que utilice esta interfaz, garantizamos que pueda trabajar con cualquier clase que la implemente. Esto permite que los algoritmos de ingesta sean completamente intercambiables, proporcionando una enorme flexibilidad al sistema [1]. El `IngestionWorker` no depende de `AisStrategy` ni de `WeatherStrategy`, sino de la abstracción `IngestionStrategy`.
 
 ### Las Estrategias Concretas: `AisStrategy` y `WeatherStrategy`
 
-Las clases AisStrategy y WeatherStrategy son las Estrategias Concretas. Cada una de ellas encapsula un algoritmo específico para obtener un tipo de dato particular, cumpliendo con el contrato establecido por la interfaz IngestionStrategy.
+Las clases `AisStrategy` y `WeatherStrategy` son las Estrategias Concretas. Cada una de ellas encapsula un algoritmo específico para obtener un tipo de dato particular, cumpliendo con el contrato establecido por la interfaz `IngestionStrategy`.
 
-* AisStrategy contendría la lógica para conectarse a una fuente de datos de AIS (Sistema de Identificación Automática de buques) y obtener su información.
-* WeatherStrategy encapsularía el código necesario para consultar una API meteorológica y extraer los datos relevantes.
+* `AisStrategy` contendría la lógica para conectarse a una fuente de datos de AIS (Sistema de Identificación Automática de buques) y obtener su información.
+* `WeatherStrategy` encapsularía el código necesario para consultar una API meteorológica y extraer los datos relevantes.
 
 Cada clase es una unidad cohesiva y autónoma de funcionalidad, responsable de una única tarea: la ingesta de un tipo de dato específico. El análisis de estos componentes demuestra cómo el patrón Strategy organiza el código de una manera lógica y desacoplada, lo que a su vez habilita una serie de beneficios arquitectónicos de alto nivel.
 
@@ -54,11 +54,11 @@ Cada clase es una unidad cohesiva y autónoma de funcionalidad, responsable de u
 
 Los beneficios arquitectónicos evaluados a continuación no surgen por accidente; son el resultado directo de aplicar rigurosamente principios de diseño como "Programar para una Interfaz" y "Favorecer la Composición", materializando sus promesas teóricas en características sistémicas medibles ("-ilidades") [2]. La aplicación del patrón Strategy en el contexto de la ingesta de datos ofrece beneficios tangibles que mejoran la robustez y la vida útil del sistema.
 
-1. Flexibilidad y Extensibilidad. El diseño resultante es inherentemente flexible. El IngestionWorker puede cambiar su comportamiento dinámicamente simplemente cambiando el objeto de estrategia que utiliza. Más importante aún, el sistema es "abierto a extensiones". Como se indica en las notas del diagrama, si surge un nuevo requisito para ingerir datos de precios de combustible (BunkerPriceStrategy), se puede añadir una nueva clase de estrategia sin realizar ninguna modificación en el IngestionWorker existente. Esto es fundamental para construir una arquitectura evolutiva, capaz de adaptarse a nuevos requisitos de negocio con un impacto mínimo en el código base y un riesgo reducido de introducir errores.
+1. Flexibilidad y Extensibilidad. El diseño resultante es inherentemente flexible. El `IngestionWorker` puede cambiar su comportamiento dinámicamente simplemente cambiando el objeto de estrategia que utiliza. Más importante aún, el sistema es "abierto a extensiones". Como se indica en las notas del diagrama, si surge un nuevo requisito para ingerir datos de precios de combustible (BunkerPriceStrategy), se puede añadir una nueva clase de estrategia sin realizar ninguna modificación en el `IngestionWorker` existente. Esto es fundamental para construir una arquitectura evolutiva, capaz de adaptarse a nuevos requisitos de negocio con un impacto mínimo en el código base y un riesgo reducido de introducir errores.
 
-2. Alto Desacoplamiento y Cohesión. El patrón promueve un diseño "débilmente acoplado" (loosely coupled), un principio fundamental para sistemas mantenibles [1]. El IngestionWorker (el cliente) y las estrategias concretas (los algoritmos) no están directamente ligados entre sí. Este desacoplamiento no es solo un principio de codificación, sino la implementación táctica necesaria para alcanzar características arquitectónicas clave como la Capacidad de Prueba (Testability), la Capacidad de Despliegue (Deployability) y la Mantenibilidad (Maintainability) [2]. Las estrategias pueden evolucionar y ser probadas de forma aislada sin afectar al IngestionWorker, lo que simplifica las pruebas unitarias y reduce la propagación de cambios. Al mismo tiempo, cada estrategia exhibe una alta cohesión, ya que toda la lógica relacionada con una fuente de datos específica está encapsulada en una sola clase.
+2. Alto Desacoplamiento y Cohesión. El patrón promueve un diseño "débilmente acoplado" (loosely coupled), un principio fundamental para sistemas mantenibles [1]. El `IngestionWorker` (el cliente) y las estrategias concretas (los algoritmos) no están directamente ligados entre sí. Este desacoplamiento no es solo un principio de codificación, sino la implementación táctica necesaria para alcanzar características arquitectónicas clave como la Capacidad de Prueba (Testability), la Capacidad de Despliegue (Deployability) y la Mantenibilidad (Maintainability) [2]. Las estrategias pueden evolucionar y ser probadas de forma aislada sin afectar al `IngestionWorker`, lo que simplifica las pruebas unitarias y reduce la propagación de cambios. Al mismo tiempo, cada estrategia exhibe una alta cohesión, ya que toda la lógica relacionada con una fuente de datos específica está encapsulada en una sola clase.
 
-3. Simplificación y Responsabilidad Única. El IngestionWorker se ve notablemente simplificado. En lugar de contener una lógica condicional compleja para manejar cada tipo de fuente de datos, su única responsabilidad es orquestar la ejecución de una estrategia. Esto se alinea directamente con el Principio de Responsabilidad Única, que postula que una clase debe tener una sola razón para cambiar. La responsabilidad del IngestionWorker es la orquestación del proceso de ingesta, no los detalles de cómo se realiza esa ingesta. Esta delegación de responsabilidad hace que el código sea más limpio, más fácil de entender y menos propenso a errores.
+3. Simplificación y Responsabilidad Única. El `IngestionWorker` se ve notablemente simplificado. En lugar de contener una lógica condicional compleja para manejar cada tipo de fuente de datos, su única responsabilidad es orquestar la ejecución de una estrategia. Esto se alinea directamente con el Principio de Responsabilidad Única, que postula que una clase debe tener una sola razón para cambiar. La responsabilidad del `IngestionWorker` es la orquestación del proceso de ingesta, no los detalles de cómo se realiza esa ingesta. Esta delegación de responsabilidad hace que el código sea más limpio, más fácil de entender y menos propenso a errores.
 
 Estos beneficios teóricos se traducen en ventajas prácticas directas cuando se aplican al dominio de la ingeniería de datos, donde la agilidad para incorporar nuevas fuentes es un factor competitivo clave.
 
@@ -78,10 +78,10 @@ Fácil de probar: Cada estrategia puede ser probada de forma aislada (pruebas un
 
 El patrón Strategy no se limita a las fuentes de datos del ejemplo. Su flexibilidad lo convierte en una solución ideal para una variedad de escenarios de ingesta en plataformas de datos modernas, donde coexisten múltiples tecnologías de procesamiento y almacenamiento [5, 6]. Algunos ejemplos de estrategias adicionales podrían ser:
 
-* KafkaStreamStrategy: Para consumir datos de un topic de Kafka, manejando la lógica de conexión y deserialización de mensajes en tiempo real.
-* S3BatchStrategy: Para procesar archivos por lotes (CSV, Parquet, JSON) desde un bucket de almacenamiento de objetos como Amazon S3, encapsulando la lógica de listado y lectura de archivos.
-* CDCStrategy: Para implementar la Captura de Cambios en los Datos (Change Data Capture) desde una base de datos transaccional, procesando el flujo de eventos de inserción, actualización y eliminación.
-* RestApiStrategy: Para obtener datos de una API REST de terceros, gestionando la autenticación, paginación y manejo de límites de peticiones (rate limiting).
+* `KafkaStreamStrategy`: Para consumir datos de un topic de Kafka, manejando la lógica de conexión y deserialización de mensajes en tiempo real.
+* `S3BatchStrategy`: Para procesar archivos por lotes (CSV, Parquet, JSON) desde un bucket de almacenamiento de objetos como Amazon S3, encapsulando la lógica de listado y lectura de archivos.
+* `CDCStrategy`: Para implementar la Captura de Cambios en los Datos (Change Data Capture) desde una base de datos transaccional, procesando el flujo de eventos de inserción, actualización y eliminación.
+* `RestApiStrategy`: Para obtener datos de una API REST de terceros, gestionando la autenticación, paginación y manejo de límites de peticiones (rate limiting).
 
 La implementación del patrón Strategy es, por tanto, una herramienta táctica clave que permite a los ingenieros de datos construir sistemas de ingesta que no solo son funcionalmente correctos hoy, sino que están arquitectónicamente preparados para evolucionar mañana.
 
