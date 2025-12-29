@@ -14,7 +14,7 @@ Este informe procederá a analizar las vistas arquitectónicas clave del sistema
 
 El Diagrama de Contexto, correspondiente al Nivel 1 del modelo C4, es una herramienta esencial para establecer una comprensión compartida del sistema en su nivel más abstracto. Su propósito es delimitar claramente el alcance de la plataforma NavOptima, identificar a sus usuarios clave (actores) y visualizar las interacciones críticas con los sistemas externos de los que depende. Al tratar el sistema como una "caja negra", este diagrama establece el marco operativo y las fronteras de la plataforma sin entrar en detalles de su implementación interna.
 
-![Diagrama de Contexto C4](c4_model/context-system-diagram.png)
+![Diagrama de Contexto C4](context-system-diagram.png)
 
 > **Figura 1**: Diagrama de Contexto de la Plataforma NavOptima (Descripción: Un diagrama de contexto que muestra a los actores "Gerente de Flota" y "Auditor Financiero" interactuando con el sistema "Plataforma NavOptima". El sistema a su vez se comunica con dos sistemas externos: "Proveedor AIS" vía Streaming y "Bunker Price API".)
 
@@ -40,7 +40,7 @@ Este análisis de contexto demuestra cómo los requisitos de los actores y las c
 
 La Vista de Contenedores (Nivel 2 del modelo C4) descompone la plataforma NavOptima para revelar su estructura interna y la topología de sus principales componentes ejecutables. Esta arquitectura implementa el patrón Medallion Architecture, una estrategia de diseño por capas que se ha consolidado como un estándar en la ingeniería de datos moderna. Este patrón organiza el flujo de datos en etapas progresivas de refinamiento—Bronze, Silver y Gold—, transformando los datos desde su estado crudo hasta un formato agregado y listo para el análisis de negocio y la aplicación de modelos de machine learning.
 
-![Diagrama de Containers C4](c4_model/container-diagram.png)
+![Diagrama de Containers C4](container-diagram.png)
 
 >**Figura 2:** Diagrama de Contenedores con Medallion Architecture (Descripción: Un diagrama de contenedores que ilustra un flujo de datos orquestado por "Apache Airflow". El flujo atraviesa tres capas delimitadas: "Capa Bronze" con un "Ingestion Worker", "Capa Silver" con un "Financial Processor" y "Capa Gold" con un "ML Engine".)
 
