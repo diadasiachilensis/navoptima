@@ -1,0 +1,92 @@
+# ===========================
+# PYTHON & VIRTUAL ENV
+# ===========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales (nombre común)
+venv/
+.venv/
+env/
+.env/
+
+# Distribución
+dist/
+build/
+*.egg-info/
+
+# ===========================
+# SEGURIDAD & VARIABLES
+# ===========================
+# CRÍTICO: Nunca subir claves reales
+.env
+.env.local
+.env.*
+# Excepción: Queremos subir el ejemplo
+!.env.example
+
+# ===========================
+# IDEs & OS
+# ===========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ===========================
+# DATA LAKE SIMULATION (NavOptima)
+# ===========================
+# Ignorar cualquier archivo dentro de data...
+data/raw/*
+data/staging/*
+data/curated/*
+data/temp/*
+
+# ...PERO mantener los archivos .gitkeep para no perder la estructura de carpetas
+!data/raw/.gitkeep
+!data/staging/.gitkeep
+!data/curated/.gitkeep
+
+# Ignorar extensiones de datos comunes si quedan sueltas
+*.csv
+*.parquet
+*.json
+*.avro
+*.xlsx
+*.log
+
+# ===========================
+# ORQUESTACIÓN (Airflow/Docker)
+# ===========================
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_admin_password.txt
+logs/
+*.pid
+
+# Docker
+.docker/
+
+# ===========================
+# MACHINE LEARNING & MLFLOW
+# ===========================
+# Metadata local de experimentos
+mlruns/
+.trash/
+
+# Modelos serializados (son binarios pesados)
+*.pkl
+*.joblib
+*.h5
+*.onnx
+model_checkpoints/
+
+# ===========================
+# TESTING & QUALITY
+# ===========================
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
