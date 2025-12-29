@@ -78,7 +78,7 @@ Para mitigar este riesgo, la estrategia de validación del ML Engine debe emplea
 
 En conjunto, la arquitectura Medallion implementada en NavOptima proporciona un marco robusto y escalable que transforma sistemáticamente los datos brutos para soportar desde la auditoría financiera más estricta hasta la inteligencia artificial predictiva más avanzada.
 
-## Referencias Bibliográficas
+## Bibliografía
 
 Ford, N., Richards, M., Sadalage, P., & Dehghani, Z. (2021). Software architecture: The hard parts: Modern trade-off analyses for distributed architectures. O'Reilly Media.
 

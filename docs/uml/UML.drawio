@@ -1,0 +1,94 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram name="Página-1" id="HsWErDH-VznC5nZPYC4X">
+    <mxGraphModel dx="1426" dy="1668" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="doxEViEZkFTKCQz64YLA-1" value="IngestionWorker" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=36.8;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="760" y="-510" width="310" height="192.8" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-2" value="- strategy: IngestionStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-1">
+          <mxGeometry y="36.8" width="310" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-3" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="doxEViEZkFTKCQz64YLA-1">
+          <mxGeometry y="73.8" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-4" value="+ __init__(strategy: IngestionStrategy)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-1">
+          <mxGeometry y="81.8" width="310" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-5" value="+ set_strategy(strategy: IngestionStrategy)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-1">
+          <mxGeometry y="118.8" width="310" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-6" value="+ run_ingestion_job(execution_date: Date) : : bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-1">
+          <mxGeometry y="155.8" width="310" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-7" value="&lt;&lt;interface&gt;&gt;&#xa;IngestionStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=38;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="-500" width="406" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-8" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="doxEViEZkFTKCQz64YLA-7">
+          <mxGeometry y="38" width="406" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-9" value="+ fetch(config: Dict) : : DataFrame" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-7">
+          <mxGeometry y="46" width="406" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-10" value="+ validate_schema(data: DataFrame) : : bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-7">
+          <mxGeometry y="88" width="406" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-11" value="AisStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=36.888888888888886;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="-210" width="311" height="155.88888888888889" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-12" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="doxEViEZkFTKCQz64YLA-11">
+          <mxGeometry y="36.888888888888886" width="311" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-13" value="+ fetch(config: Dict) : : DataFrame" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-11">
+          <mxGeometry y="44.888888888888886" width="311" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-14" value="- connect_websocket()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-11">
+          <mxGeometry y="81.88888888888889" width="311" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-15" value="- parse_binary_stream()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-11">
+          <mxGeometry y="118.88888888888889" width="311" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-16" value="WeatherStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=36.888888888888886;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="380" y="-210" width="332" height="155.88888888888889" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-17" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="doxEViEZkFTKCQz64YLA-16">
+          <mxGeometry y="36.888888888888886" width="332" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-18" value="+ fetch(config: Dict) : : DataFrame" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-16">
+          <mxGeometry y="44.888888888888886" width="332" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-19" value="- build_rest_url()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-16">
+          <mxGeometry y="81.88888888888889" width="332" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-20" value="- handle_rate_limit()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="doxEViEZkFTKCQz64YLA-16">
+          <mxGeometry y="118.88888888888889" width="332" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-21" value="Contexto: No sabe si conecta a Clima o AIS.&#xa;Solo llama a fetch()." style="align=center;spacingLeft=4;" vertex="1" parent="1">
+          <mxGeometry x="780" y="-750" width="270" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-22" value="Contrato: Define el estándar.&#xa;Para agregar &#39;BunkerPrice&#39;, creamos una clase nueva&#xa;sin tocar el Worker." style="align=center;spacingLeft=4;" vertex="1" parent="1">
+          <mxGeometry x="50" y="-750" width="324" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-23" value="" style="dashed=1;dashPattern=2 3;startArrow=none;endArrow=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="doxEViEZkFTKCQz64YLA-21" target="doxEViEZkFTKCQz64YLA-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-24" value="" style="dashed=1;dashPattern=2 3;startArrow=none;endArrow=none;exitX=0.5;exitY=1;entryX=0;entryY=0.06;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="doxEViEZkFTKCQz64YLA-22" target="doxEViEZkFTKCQz64YLA-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-25" value="Contexto usa Estrategia" style="startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;entryX=1;entryY=0.06;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=-0.001;exitY=0.114;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="doxEViEZkFTKCQz64YLA-1" target="doxEViEZkFTKCQz64YLA-7">
+          <mxGeometry x="0.0232" relative="1" as="geometry">
+            <mxPoint x="1020" y="-410" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-26" value="Implementa" style="dashed=1;startArrow=block;startSize=16;startFill=0;endArrow=none;exitX=0.18;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="doxEViEZkFTKCQz64YLA-7" target="doxEViEZkFTKCQz64YLA-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doxEViEZkFTKCQz64YLA-27" value="Implementa" style="dashed=1;startArrow=block;startSize=16;startFill=0;endArrow=none;exitX=0.82;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="doxEViEZkFTKCQz64YLA-7" target="doxEViEZkFTKCQz64YLA-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
