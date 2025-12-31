@@ -1,4 +1,4 @@
-# **🧭 Navoptima: Plataforma de Ingeniería de Datos para Predicción de Churn**
+# **🧭 NavOptima: Plataforma de Ingeniería de Datos para Eficiencia de Combustible**
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Container-blue?style=for-the-badge&logo=docker&logoColor=white)
@@ -13,13 +13,13 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 
-Este documento proporciona una visión detallada del proyecto de ingeniería de datos **Navoptima**. Su objetivo es servir como una guía central para desarrolladores, ingenieros y stakeholders, detallando los objetivos, la arquitectura del sistema, la pila tecnológica y las instrucciones para su despliegue y ejecución.
+Este documento proporciona una visión detallada del proyecto de ingeniería de datos **NavOptima**. Su objetivo es servir como una guía central para desarrolladores, ingenieros y stakeholders, detallando los objetivos, la arquitectura del sistema, la pila tecnológica y las instrucciones para su despliegue y ejecución.
 
 ## **📝 Resumen del Proyecto**
 
-**Navoptima** es una plataforma de ingeniería de datos de alto rendimiento diseñada para procesar y analizar flujos de eventos en tiempo real y por lotes.
+**NavOptima** es una plataforma de inteligencia operativa diseñada para procesar telemetría marítima y variables climáticas con el fin de optimizar el mayor costo operativo de la flota: el combustible.
 
-El proyecto resuelve el desafío crítico de transformar datos crudos y volátiles en insights accionables y predicciones de baja latencia, permitiendo a la organización optimizar sus operaciones de negocio, como la **\[predicción de abandono de clientes\]**, con agilidad y precisión.
+El proyecto resuelve el desafío crítico de transformar datos crudos de posicionamiento (AIS) y meteorología en insights financieros y predicciones de consumo auditables, permitiendo a la organización **Ultranav** monitorear la eficiencia de la flota y reducir su huella de carbono con precisión decimal.
 
 ## **📑 Tabla de Contenidos**
 
@@ -30,150 +30,134 @@ El proyecto resuelve el desafío crítico de transformar datos crudos y volátil
 5. [Estructura del Proyecto](https://www.google.com/search?q=%23-5-estructura-del-proyecto)  
 6. [Licencia](https://www.google.com/search?q=%23-6-licencia)
 
-## **🎯 1\. Objetivos del Negocio y Técnicos**
+## **🎯 1. Objetivos del Negocio y Técnicos**
 
-Un principio fundamental en el diseño de sistemas de Machine Learning es la alineación estricta entre los objetivos técnicos y las métricas de negocio. El éxito de un proyecto de datos no se mide por la precisión del modelo en un vacío, sino por su capacidad para generar un impacto tangible en los indicadores clave del negocio. **Navoptima** se ha diseñado con esta filosofía en su núcleo.
+Un principio fundamental en el diseño de **NavOptima** es la alineación estricta entre la ingeniería de datos y el impacto financiero (OPEX). No buscamos solo predecir, sino auditar y optimizar.
 
 ### **1.1. Problema de Negocio**
 
-La organización necesita una capacidad proactiva para identificar a los clientes en riesgo de abandonar el servicio (*churn*). Las soluciones existentes procesan los datos de forma periódica (diaria o semanal), lo que genera una ventana de tiempo demasiado amplia durante la cual se pierden oportunidades de retención.
+La organización carece de una trazabilidad integrada entre la operación física de los buques y su impacto financiero real. Las estimaciones de consumo actuales se basan en reportes manuales o promedios estáticos, lo que impide detectar ineficiencias causadas por clima adverso o degradación del casco en tiempo útil.
 
-**Solución:** Navoptima aborda este problema proporcionando predicciones casi en tiempo real sobre la probabilidad de abandono, permitiendo intervenciones personalizadas y oportunas.
+**Solución:** NavOptima integra datos de **Telemetría AIS**, **Clima (ERA5)** y **Precios de Mercado (USDA)** para generar una "Verdad Única" sobre el costo del viaje.
 
 ### **1.2. Objetivos Técnicos**
 
-Para resolver el problema de negocio, la arquitectura debe equilibrar el inherente *trade-off* entre el rendimiento del procesamiento por lotes y la latencia de las predicciones en tiempo real. Se han definido los siguientes objetivos técnicos clave:
+La arquitectura debe equilibrar la precisión financiera con la capacidad predictiva. Se han definido los siguientes pilares:
 
-* **⚡ Alto Rendimiento (High Throughput):** Para garantizar que nuestros modelos de ML se entrenen con datos completos y precisos, el sistema debe procesar de manera eficiente grandes volúmenes de datos históricos. Este enfoque por lotes es fundamental para el análisis exploratorio y el reentrenamiento periódico de los modelos.  
-* **⏱️ Baja Latencia (Low Latency):** Para el caso de uso de predicción de abandono, servir predicciones con un retardo mínimo es crítico para habilitar intervenciones proactivas y oportunas (ej. ofrecer un descuento personalizado) antes de que un cliente finalice su decisión de abandonar el servicio.  
-* **🔄 Idempotencia:** Para lograr un procesamiento de datos fiable, nuestros pipelines deben ser resilientes a fallos y reejecuciones. Al implementar *Idempotency Design Patterns* como el **Merger pattern**, garantizamos que la reejecución de un trabajo no introduzca datos duplicados ni corrompa el estado del sistema, lo cual es fundacional para la integridad de nuestro *feature store*.  
-* **💎 Calidad de Datos:** El poder predictivo de nuestros modelos depende directamente de la integridad de los datos de entrada. Para garantizarla, aplicamos el patrón **Constraints Enforcer**, que valida que solo los datos que cumplen con un esquema y reglas de negocio predefinidas sean procesados, previniendo que datos de mala calidad se propaguen por el sistema.
+* **📊 Auditabilidad Financiera:** A diferencia de sistemas puramente predictivos, NavOptima prioriza la integridad del dato. Utilizamos tipos Decimal y patrones de **SCD Tipo 2** para garantizar que los costos históricos sean reproducibles ante una auditoría.  
+* **🛡️ Idempotencia:** Nuestros pipelines de ingesta (Capa Bronze) son resilientes. Implementamos el patrón **Strategy** para asegurar que re-procesar un archivo de AIS no duplique costos ni altere la historia.  
+* **🌐 Transferencia de Aprendizaje (Transfer Learning):** Ante la falta de datos locales etiquetados, el sistema está diseñado para entrenar modelos con datasets globales (Dinamarca) y aplicar la inferencia en rutas locales, validando la física naval subyacente.  
+* **💎 Calidad de Datos (Contracts):** El poder predictivo depende de la integridad de la entrada. Utilizamos **Pydantic** para validar esquemas estrictos en la ingesta, rechazando datos corruptos antes de que contaminen la Capa Silver.
 
-La siguiente arquitectura es una respuesta directa a estos requisitos técnicos, con cada componente y patrón de diseño elegido para satisfacer uno o más de estos objetivos.
+## **🏗️ 2. Arquitectura del Sistema**
 
-## **🏗️ 2\. Arquitectura del Sistema**
-
-La arquitectura de Navoptima está estructurada siguiendo las fases del **Ciclo de Vida de la Ingeniería de Datos (Data Engineering Lifecycle)**. Este enfoque sistémico no solo garantiza un flujo de datos coherente, sino que también nos permite aislar, optimizar y escalar cada fase de manera independiente, una decisión clave para la mantenibilidad y evolución del sistema a largo plazo.
+La arquitectura sigue el patrón **Medallion (Bronze-Silver-Gold)** orquestado centralmente para garantizar trazabilidad.
 
 ### **2.1. Descripción General**
 
-El flujo de datos de alto nivel sigue la secuencia de procesamiento definida por el ciclo de vida del dato:
+El flujo de datos transforma la "Señal Física" en "Valor Financiero":
 
-1. **Fuentes de Datos (Generation):** Sistemas transaccionales y de eventos generan los datos crudos.  
-2. **Almacenamiento (Storage):** Los datos crudos y procesados se almacenan en un sistema optimizado para escalabilidad y acceso eficiente.  
-3. **Ingesta (Ingestion):** Los datos son capturados desde las fuentes y transportados a nuestra capa de transformación.  
-4. **Transformación (Transformation):** Los datos crudos se limpian, enriquecen y modelan para su uso en análisis y Machine Learning.  
-5. **Servicio de Datos (Serving):** Los datos procesados y las predicciones del modelo se exponen a los sistemas consumidores.
+1. **Fuentes (Generation):** APIs externas de AIS, Clima y Mercado.  
+2. **Ingesta (Bronze):** Aterrizaje de datos crudos inmutables.  
+3. **Procesamiento (Silver):** Limpieza, cruce espacio-temporal y cálculo de costos.  
+4. **Inteligencia (Gold):** Agregaciones para BI y Features para ML.  
+5. **Servicio (Serving):** Dashboards en Power BI y APIs de inferencia.
 
 ### **2.2. Fases del Ciclo de Vida del Dato**
 
-#### **📡 Fuentes de Datos (Generation)**
+#### **📡 Fuentes de Datos**
 
-Navoptima se alimenta de una variedad de sistemas de origen, incluyendo bases de datos de aplicaciones **OLTP** (con un *fixed schema*) que registran las transacciones de los usuarios y flujos de eventos de telemetría (considerados *schemaless*) que capturan las interacciones en tiempo real. Esta diversidad requiere una arquitectura de almacenamiento e ingesta flexible.
+NavOptima ingesta datos heterogéneos: **Telemetría de Alta Frecuencia** (AIS), **Grillas Meteorológicas** (GRIB/NetCDF) y **Series Temporales Financieras** (Precios Bunker/Dólar).
 
-#### **💾 Almacenamiento (Storage)**
+#### **💾 Almacenamiento (Data Lakehouse)**
 
-Nuestra arquitectura se basa en un enfoque **Data Lakehouse**, una decisión estratégica para combinar la flexibilidad de un Data Lake —ideal para almacenar los flujos de eventos *schemaless*— con las garantías transaccionales **ACID** y el rendimiento de un Data Warehouse, que es esencial para el consumo por parte de herramientas de BI y analistas.
-
-La base de nuestro almacenamiento es un *object store* (ej. Amazon S3) con un formato de tabla abierta (ej. Delta Lake), lo que implementa el principio clave de **Separación de Cómputo y Almacenamiento**. Esto nos permite escalar los recursos de procesamiento y almacenamiento de forma independiente, optimizando costos y rendimiento.
+Utilizamos una arquitectura híbrida. **MinIO/S3** actúa como Data Lake para los archivos crudos (Bronze), mientras que **PostgreSQL** sirve como Data Warehouse para las capas Silver y Gold, permitiendo consultas SQL complejas y garantías ACID para los datos financieros.
 
 #### **📥 Ingesta (Ingestion)**
 
-Para satisfacer el *trade-off* entre alto rendimiento y baja latencia, la estrategia de ingesta es híbrida.
-
-* **Batch:** Para el procesamiento por lotes que alimenta el reentrenamiento de modelos, empleamos patrones como el **Incremental Loader** para cargar eficientemente solo los cambios diferenciales, satisfaciendo el objetivo de Alto Rendimiento.  
-* **Real-time:** Para las predicciones de abandono en tiempo real, se implementa una ingesta por streaming que captura cambios de la base de datos (**CDC**) a través de un **Passthrough Replicator**, garantizando la Baja Latencia necesaria para intervenciones oportunas.
+La estrategia es **Batch Micro-particionado**. Un IngestionWorker en Python, orquestado por Airflow, descarga diariamente los deltas de datos. Se aplica el **Patrón Strategy** para desacoplar la lógica de conexión (API vs FTP) de la lógica de negocio.
 
 #### **🔄 Transformación (Transformation)**
 
-Adoptamos un modelo **ELT (Extract, Load, Transform)**, que es la elección natural para una arquitectura Lakehouse. Al cargar primero los datos crudos en el almacenamiento de bajo costo, podemos aprovechar el principio de 'Separación de Cómputo y Almacenamiento' para aplicar transformaciones complejas utilizando motores de procesamiento distribuido potentes como **Spark**. Este enfoque es más escalable y rentable que el ETL tradicional.
+El núcleo del sistema. Aquí ocurre la **"Magia Física"**:
 
-Durante esta fase, aplicamos patrones clave como el **Merger pattern** para la idempotencia en las operaciones de actualización y el **Data Enrichment** para añadir valor contextual a los datos.
+* **Data Fusion:** Cruzamos la posición GPS del barco con la celda climática correspondiente (Viento/Olas).  
+* **Physics Proxy:** Aplicamos la "Ley del Cubo" para estimar el consumo teórico.  
+* **Financial Context:** Convertimos el consumo a USD y CLP usando las tasas del día.
 
-#### **📤 Servicio de Datos (Serving Data)**
+#### **📤 Servicio de Datos (Serving)**
 
-Los resultados finales se exponen de dos maneras, equilibrando el *trade-off* entre latencia y rendimiento:
+* **Gold Layer:** Tablas dimensionales (Star Schema) optimizadas para Power BI.  
+* **MLFlow:** Registro de modelos entrenados (XGBoost) listos para predecir consumo futuro.
 
-1. **Tablas Agregadas:** Disponibles en el Data Lakehouse para que los analistas de negocio y científicos de datos las consuman a través de herramientas de BI o notebooks.  
-2. **API de Predicción:** Un microservicio de baja latencia que expone las predicciones del modelo para el consumo síncrono por parte de las aplicaciones cliente.
+## **🛠️ 3. Pila Tecnológica (Tech Stack)**
 
-La implementación de esta arquitectura se apoya en un conjunto de tecnologías cuidadosamente seleccionadas por su robustez, escalabilidad y madurez en el ecosistema de datos.
-
-## **🛠️ 3\. Pila Tecnológica (Tech Stack)**
-
-La siguiente tabla resume las tecnologías clave utilizadas en el proyecto Navoptima, agrupadas por su función dentro del ciclo de vida del dato.
+Tecnologías seleccionadas por su madurez y capacidad de auditoría.
 
 | Categoría | Tecnologías |
 | :---- | :---- |
-| **Orquestación de Flujos** | Apache Airflow, Dagster |
-| **Procesamiento de Datos** | Apache Spark, Apache Flink |
-| **Streaming y Mensajería** | Apache Kafka, Amazon Kinesis |
-| **Almacenamiento** | Delta Lake, PostgreSQL, Amazon S3 |
-| **Servicio de Predicciones** | API REST con FastAPI, Seldon Core |
-| **Contenerización** | Docker, Kubernetes (K8s) |
+| **Orquestación** | **Apache Airflow** (Gestión de dependencias y backfills) |
+| **Lenguaje Core** | **Python 3.10+** (Pandas, Pydantic, Scikit-Learn) |
+| **Almacenamiento** | **PostgreSQL** (DW), **MinIO** (Object Storage) |
+| **Machine Learning** | **XGBoost** (Modelo), **MLflow** (Experiment Tracking) |
+| **Visualización** | **Power BI** (Business Dashboard), **Seaborn** (EDA) |
+| **Infraestructura** | **Docker**, **Docker Compose** |
 
-## **🚀 4\. Cómo Empezar (Getting Started)**
-
-Sigue estos pasos para configurar y ejecutar una versión local del entorno de desarrollo del proyecto.
+## **🚀 4. Cómo Empezar (Getting Started)**
 
 ### **4.1. Prerrequisitos**
 
-Asegúrate de tener instaladas las siguientes herramientas en tu máquina local:
-
 * Python 3.9+  
 * Docker y Docker Compose  
-* make
+* Git
 
 ### **4.2. Instalación**
 
-Ejecuta los siguientes comandos en tu terminal para clonar el repositorio e instalar todas las dependencias necesarias.
-
 ```bash
-# Clona este repositorio  
-git clone \[https://github.com/diadasiachilensis/navoptima.git\](https://github.com/diadasiachilensis/navoptima.git)  
+# 1. Clonar el repositorio  
+git clone https://github.com/diadasiachilensis/navoptima.git
 cd navoptima
+
+# 2. Configurar entorno virtual  
+python -m venv .venv  
+source .venv/bin/activate  # o .venv\\Scripts\\activate en Windows
+
+# 3. Instalar dependencias  
+pip install -r requirements.txt
+
+# 4. Levantar infraestructura (Airflow \+ DB)  
+cd orchestration  
+docker-compose up -d  
 ```
+
+### **4.3. Ejecución de Pipelines**
+
+Para correr la ingesta inicial de datos históricos (Dinamarca \+ USDA):
+```bash
+# Ejecutar el script de ingesta manual (Bypass de Airflow para dev)  
+python src/ingestion\_worker/main.py \--mode=historical \--source=dma
+```
+
+## **📂 5. Estructura del Proyecto**
+
+Organización basada en *Domain-Driven Design* y *Data Engineering Lifecycle*.
 
 ```bash
-# Instala las dependencias de Python  
-pip install \-r requirements.txt
-```
 
-```bash
-# Construye las imágenes de Docker y levanta los servicios de infraestructura  
-# (ej. base de datos, Kafka) definidos en docker-compose.yml.  
-make build  
-make up
-```
-
-### **4.3. Ejecución**
-
-Para iniciar un pipeline específico, utiliza el siguiente comando. Por ejemplo, para ejecutar el DAG que procesa las características diarias de abandono de clientes:
-
-```bash
-# Ejemplo para ejecutar un pipeline específico  
-make run-pipeline pipeline\_name=process\_daily\_churn\_features
-```
-
-## **📂 5\. Estructura del Proyecto**
-
-La estructura del repositorio está organizada para separar claramente las distintas responsabilidades del proyecto.
-```bash 
 navoptima/  
-├── data/              \# Scripts y ficheros relacionados con datos (ej. seeds, schemas)  
-├── notebooks/         \# Notebooks para análisis exploratorio y experimentación  
-├── src/               \# Código fuente principal de la aplicación y los pipelines  
-├── tests/             \# Pruebas unitarias y de integración  
-├── .env.example       \# Plantilla para variables de entorno  
-├── docker-compose.yml \# Definición de servicios para el entorno local  
-├── Dockerfile         \# Fichero para construir la imagen de Docker de la aplicación  
-├── LICENSE.txt        \# Licencia del proyecto  
-└── README.md          \# Esta documentación
+├── data/                     # Almacenamiento local (Raw/Staging/Curated) \- Ignorado por Git  
+├── docs/                     # Artefactos de Ingeniería (ADRs, Diagramas, Whitepapers)  
+├── notebooks/                # Laboratorio de Data Science (EDA y Prototipos ML)  
+├── orchestration/            # Definición de infraestructura (Docker, DAGs)  
+├── src/                      # Código Fuente de Producción  
+│   ├── ingestion\_worker/    # Capa Bronze (Extract)  
+│   ├── data\_processor/      # Capa Silver (Transform & Enrich)  
+│   ├── ml\_engine/           # Capa Gold (Train & Predict)  
+│   └── shared/               # Contratos de Datos (Schemas Pydantic)  
+├── tests/                    # Tests Unitarios y de Arquitectura  
+└── README.md                 # Esta documentación  
 ```
 
-## **📄 6\. Licencia**
+## **📄 6. Licencia**
 
 Distribuido bajo la **Licencia MIT**. Consulta LICENSE.txt para obtener más información.
-
-
-
