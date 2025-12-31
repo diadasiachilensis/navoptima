@@ -129,28 +129,36 @@ Asegúrate de tener instaladas las siguientes herramientas en tu máquina local:
 Ejecuta los siguientes comandos en tu terminal para clonar el repositorio e instalar todas las dependencias necesarias.
 
 \# Clona este repositorio  
+```bash
 git clone \[https://github.com/diadasiachilensis/navoptima.git\](https://github.com/diadasiachilensis/navoptima.git)  
 cd navoptima
+```
 
 \# Instala las dependencias de Python  
+```bash
 pip install \-r requirements.txt
+```
 
 \# Construye las imágenes de Docker y levanta los servicios de infraestructura  
 \# (ej. base de datos, Kafka) definidos en docker-compose.yml.  
+```bash
 make build  
 make up
+```
 
 ### **4.3. Ejecución**
 
 Para iniciar un pipeline específico, utiliza el siguiente comando. Por ejemplo, para ejecutar el DAG que procesa las características diarias de abandono de clientes:
 
 \# Ejemplo para ejecutar un pipeline específico  
+```bash
 make run-pipeline pipeline\_name=process\_daily\_churn\_features
+```
 
 ## **📂 5\. Estructura del Proyecto**
 
 La estructura del repositorio está organizada para separar claramente las distintas responsabilidades del proyecto.
-
+```bash 
 navoptima/  
 ├── data/              \# Scripts y ficheros relacionados con datos (ej. seeds, schemas)  
 ├── notebooks/         \# Notebooks para análisis exploratorio y experimentación  
@@ -161,7 +169,9 @@ navoptima/
 ├── Dockerfile         \# Fichero para construir la imagen de Docker de la aplicación  
 ├── LICENSE.txt        \# Licencia del proyecto  
 └── README.md          \# Esta documentación
+```
 
 ## **📄 6\. Licencia**
 
 Distribuido bajo la **Licencia MIT**. Consulta LICENSE.txt para obtener más información.
+
