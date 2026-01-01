@@ -2,4 +2,7 @@ pandas
 numpy
 matplotlib
 seaborn
-warnings
+statsmodels
+scikit-learn
+jinja2
+xgboost
