@@ -13,6 +13,25 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 
+## Copyright & License / Licencia y Derechos de Autor
+
+**Copyright (c) [2026] [Tu Nombre Completo]. All Rights Reserved.**
+
+### English
+This project is proprietary and confidential. Unauthorized copying, distribution, modification, or use of this source code or any associated files, via any medium, is strictly prohibited. 
+
+This repository is for portfolio/demonstration purposes only. No license is granted to use this software.
+
+---
+
+### Español
+**Copyright (c) [2026] [Tu Nombre Completo]. Todos los derechos reservados.**
+
+Este proyecto es propietario y confidencial. Queda estrictamente prohibida la copia, distribución, modificación o uso no autorizado de este código fuente o cualquiera de sus archivos asociados, por cualquier medio.
+
+Este repositorio es únicamente con fines de demostración o portafolio. No se otorga ninguna licencia para usar este software.
+
+
 Este documento proporciona una visión detallada del proyecto de ingeniería de datos **NavOptima**. Su objetivo es servir como una guía central para desarrolladores, ingenieros y stakeholders, detallando los objetivos, la arquitectura del sistema, la pila tecnológica y las instrucciones para su despliegue y ejecución.
 
 ## **📝 Resumen del Proyecto**
