@@ -15,7 +15,7 @@
 
 ## Copyright & License / Licencia y Derechos de Autor
 
-**Copyright (c) [2026] [Tu Nombre Completo]. All Rights Reserved.**
+**Copyright (c) [2026]. All Rights Reserved.**
 
 ### English
 This project is proprietary and confidential. Unauthorized copying, distribution, modification, or use of this source code or any associated files, via any medium, is strictly prohibited. 
@@ -25,7 +25,7 @@ This repository is for portfolio/demonstration purposes only. No license is gran
 ---
 
 ### Español
-**Copyright (c) [2026] [Tu Nombre Completo]. Todos los derechos reservados.**
+**Copyright (c) [2026]. Todos los derechos reservados.**
 
 Este proyecto es propietario y confidencial. Queda estrictamente prohibida la copia, distribución, modificación o uso no autorizado de este código fuente o cualquiera de sus archivos asociados, por cualquier medio.
 
