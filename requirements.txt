@@ -1,8 +1,30 @@
-pandas
-numpy
-matplotlib
-seaborn
-statsmodels
-scikit-learn
-jinja2
-xgboost
+# =============================================================================
+# NAVOPTIMA: DEPENDENCIAS DEL SISTEMA (DS + DE + ML)
+# =============================================================================
+
+# --- Core Data Science & Analysis (Notebook 01) ---
+pandas>=2.1.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scipy>=1.11.0
+
+# --- Machine Learning & Modeling (Notebook 02) ---
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+joblib>=1.3.0
+
+# --- Climate Data & Data Fusion (Notebook 03 - Copernicus ERA5) ---
+xarray>=2023.9.0
+netCDF4>=1.6.0          # Motor para leer archivos .nc de Copernicus
+cdsapi>=0.6.1           # API oficial para descargar datos de ERA5
+cfgrib>=0.9.10          # Opcional: Para leer formatos GRIB si fuera necesario
+
+# --- Ingeniería de Datos y Calidad (Data Contracts) ---
+pydantic>=2.4.0         # Para validación de esquemas y contratos de datos
+python-dotenv>=1.0.0    # Gestión de variables de entorno (.env)
+
+# --- Utilidades de Desarrollo ---
+ipykernel               # Soporte para Jupyter Notebooks en VS Code/WSL2
+pathlib                 # Gestión de rutas agnóstica al OS (Windows/Linux)
+dotenv
