@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # SERVICIO DE BASE DE DATOS (Data Warehouse - Gold Layer)
+  # ============================================================================
+  database:
+    image: postgres:15-alpine
+    container_name: navoptima_db
+    restart: always
+    environment:
+      POSTGRES_USER: nav_user
+      POSTGRES_PASSWORD: nav_password
+      POSTGRES_DB: navoptima_warehouse
+    ports:
+      - "5432:5432"  # Expone el puerto para que te conectes desde DBeaver/Tableau
+    volumes:
+      # 1. Persistencia de datos (para que no se borren al apagar)
+      - postgres_data:/var/lib/postgresql/data
+      
+      # 2. Inicialización del Esquema (TU CAMBIO CLAVE)
+      # Postgres ejecuta automáticamente los .sql en esta carpeta al iniciar por primera vez
+      - ../docs/design/005-gold-schema-ddl.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - nav_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nav_user -d navoptima_warehouse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # SERVICIO WORKER (Donde corre tu código Python / ETL)
+  # ============================================================================
+  ingestion_worker:
+    # Construye la imagen usando el Dockerfile que está en esta misma carpeta
+    build:
+      context: ..
+      dockerfile: orchestration/Dockerfile
+    container_name: navoptima_worker
+    
+    # Variables de entorno para que Python encuentre la BD
+    environment:
+      - DB_USER=nav_user
+      - DB_PASS=nav_password
+      - DB_HOST=database  # ¡OJO! Aquí usamos el nombre del servicio, no 'localhost'
+      - DB_PORT=5432
+      - DB_NAME=navoptima_warehouse
+    
+    # Montamos el código y los datos para desarrollo (Hot-Reloading)
+    volumes:
+      - ../src:/app/src       # Tu código fuente
+      - ../data:/app/data     # Tus archivos CSV y NetCDF
+    
+    # Espera a que la BD esté saludable antes de iniciar
+    depends_on:
+      database:
+        condition: service_healthy
+    
+    # Mantiene el contenedor vivo para que puedas ejecutar comandos manualmente
+    command: tail -f /dev/null
+    networks:
+      - nav_network
+
+# ==============================================================================
+# DEFINICIONES DE RED Y VOLUMENES
+# ==============================================================================
+networks:
+  nav_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

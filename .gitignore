@@ -95,3 +95,4 @@ htmlcov/
 ~$*
 .$*
 *.tmp
+commit_message.txt
